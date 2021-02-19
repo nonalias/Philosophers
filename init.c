@@ -6,7 +6,7 @@
 /*   By: taehkim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:34:59 by taehkim           #+#    #+#             */
-/*   Updated: 2021/02/19 15:35:03 by taehkim          ###   ########.fr       */
+/*   Updated: 2021/02/19 16:01:49 by taehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		philo_init(t_philo **philo, t_info *info)
 	i = 0;
 	while (i < info->number_of_philosophers)
 	{
-        (*philo)[i].info = info;
+		(*philo)[i].info = info;
 		(*philo)[i].index = i + 1;
 		if (fork_init(philo, i))
 			return (1);
@@ -76,7 +76,6 @@ int		init(t_info *info, int argc, char **argv)
 	info->time_to_sleep = ft_atoi(argv[4]) * 1000;
 	info->status = P_STATUS_NONE;
 	info->summary_eat_count = 0;
-	// eat_count를 공유하기 위해 malloc하여 
 	info->eat_count = malloc(sizeof(int **) * info->number_of_philosophers);
 	mutex_init(info);
 	if (argc == 6)
@@ -84,7 +83,6 @@ int		init(t_info *info, int argc, char **argv)
 	else
 		info->number_of_times_each_philosopher_must_eat = 987654321;
 	gettimeofday(&time, NULL);
-    info->process_start = T_TO_MS(time.tv_sec, time.tv_usec);
-	//info->process_start = time.tv_sec * 1000L + time.tv_usec / 1000L;
+	info->process_start = time_to_msec(time);
 	return (0);
 }

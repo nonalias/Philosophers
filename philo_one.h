@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_one.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taehkim <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/19 15:52:38 by taehkim           #+#    #+#             */
+/*   Updated: 2021/02/19 16:22:23 by taehkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef __PHILO_ONE_H
 
 # define __PHILO_ONE_H
@@ -15,8 +27,6 @@
 # define GREB 1
 
 # define PHILO_INTERVAL 100
-
-# define T_TO_MS(S, US) (((S) * (1000L)) + ((US) / (1000L)))
 
 typedef struct	s_mutex
 {
@@ -36,7 +46,7 @@ typedef struct	s_info
 	long			process_start;
 	int				summary_eat_count;
 	int				**eat_count;
-    t_mutex			m;
+	t_mutex			m;
 }				t_info;
 
 typedef struct	s_philo
@@ -55,44 +65,45 @@ typedef struct	s_philo
 **	philo_one.c
 */
 
-void	print_message(void *arg_philo, char *message);
+void			print_message(void *arg_philo, char *message);
 
 /*
 **  utils.c
 */
 
-int		ft_strlen(char *str);
-int		wr_error(char *error_msg);
-int		ft_atoi(char *str);
-void	ft_putstr_fd(char *str, int fd);
-void	ft_putnbr_fd(int n, int fd);
+int				ft_strlen(char *str);
+int				wr_error(char *error_msg);
+int				ft_atoi(char *str);
+void			ft_putstr_fd(char *str, int fd);
+void			ft_putnbr_fd(int n, int fd);
 
 /*
 **  init.c
 */
 
-int		philo_init(t_philo **philo, t_info *info);
-int		init(t_info *info, int argc, char **argv);
+int				philo_init(t_philo **philo, t_info *info);
+int				init(t_info *info, int argc, char **argv);
 
 /*
 **	valid_check.c
 */
 
-int		valid_check(char **argv);
+int				valid_check(char **argv);
 
 /*
 **	callback.c
 */
 
-void	eating(void *arg_philo);
-void	*running(void *arg_philo);
-void	*die_monitoring(void *arg_philo);
+void			eating(void *arg_philo);
+void			*running(void *arg_philo);
+void			*die_monitoring(void *arg_philo);
 
 /*
 **	time.c
 */
 
-void	my_usleep(t_philo *philo, long time);
-long	get_time(t_philo *philo);
+long			time_to_msec(struct timeval time);
+void			my_usleep(t_philo *philo, long time);
+long			get_time(t_philo *philo);
 
 #endif

@@ -6,11 +6,16 @@
 /*   By: taehkim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:35:22 by taehkim           #+#    #+#             */
-/*   Updated: 2021/02/19 15:35:24 by taehkim          ###   ########.fr       */
+/*   Updated: 2021/02/19 16:21:08 by taehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+
+long	time_to_msec(struct timeval time)
+{
+	return (time.tv_sec * 1000L + time.tv_usec / 1000L);
+}
 
 long	get_time(t_philo *philo)
 {
@@ -18,7 +23,7 @@ long	get_time(t_philo *philo)
 	long			dtime;
 
 	gettimeofday(&time, NULL);
-	dtime = T_TO_MS(time.tv_sec, time.tv_usec);
+	dtime = time_to_msec(time);
 	return (dtime - philo->info->process_start);
 }
 

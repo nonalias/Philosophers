@@ -6,7 +6,7 @@
 /*   By: taehkim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:35:27 by taehkim           #+#    #+#             */
-/*   Updated: 2021/02/19 15:35:28 by taehkim          ###   ########.fr       */
+/*   Updated: 2021/02/19 15:54:23 by taehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	ft_putstr_fd(char *str, int fd)
 {
 	if (!str)
 		return ;
-
 	while (*str)
 	{
 		write(fd, &*str, 1);
