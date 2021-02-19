@@ -46,7 +46,6 @@ int		main(int argc, char **argv)
 		philo[i].pid = fork();
 		if (philo[i].pid == 0)
 			running(&philo[i]);
-		//pthread_create(&philo[i].tid, NULL, running, &(philo[i]));
 		usleep(PHILO_INTERVAL);
 		i++;
 	}
@@ -56,11 +55,4 @@ int		main(int argc, char **argv)
 		waitpid(philo[i].pid, NULL, 0);
 		i++;
 	}
-	/*
-	while (i < info.number_of_philosophers)
-	{
-		pthread_join(philo[i].tid, NULL);
-		i++;
-	}
-	*/
 }

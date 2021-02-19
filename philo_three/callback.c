@@ -67,6 +67,7 @@ void	*running(void *arg_philo)
 void	*die_monitoring(void *arg_philo)
 {
 	t_philo *philo;
+	int		i;
 
 	philo = (t_philo *)arg_philo;
 	while (philo->info->status == P_STATUS_NONE)
@@ -78,9 +79,12 @@ void	*die_monitoring(void *arg_philo)
 			sem_wait(philo->info->sem.check_die);
 			print_message(philo, " is died\n");
 			sem_post(philo->info->sem.check_die);
-			for (int i = 0; i < philo->info->number_of_philosophers; i++)
+			i = 0;
+			while (i < philo->info->number_of_philosophers)
+			{
 				kill(philo[i].pid, SIGINT);
-			//philo->info->status = P_STATUS_DEAD;
+				i++;
+			}
 		}
 	}
 	return (void *)NULL;
