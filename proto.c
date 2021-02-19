@@ -53,7 +53,7 @@ void	my_usleep(t_philo *philo, long time)
 	while (target > 1000 * get_time(philo))
 	{
 		//printf("target : %ld, get_time(philo) : %ld\n", target, get_time(philo));
-		//usleep(100);
+		usleep(100);
 	}
 }
 
@@ -140,6 +140,14 @@ void	*running(void *arg_philo)
 	//printf("tte : %d\n", philo->info->time_to_eat);
 	if (philo->index % 2 == 0)
 		my_usleep(philo, philo->info->time_to_eat);
+	//if (philo->info->number_of_philosophers % 2 == 0)
+	//{
+		//if (philo->index % 2 == 0)
+		//	my_usleep(philo, philo->info->time_to_eat);
+	//}
+	if (philo->info->number_of_philosophers % 2 == 1 &&
+			philo->index == philo->info->number_of_philosophers)
+		my_usleep(philo, philo->info->time_to_eat * 2);
 	while (philo->info->status == P_STATUS_NONE &&
 			philo->eat_count < philo->info->number_of_times_each_philosopher_must_eat)
 	{
