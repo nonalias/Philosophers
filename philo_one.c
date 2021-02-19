@@ -21,7 +21,7 @@ void	print_message(void *arg_philo, char *message)
 	{
 		pthread_mutex_lock(&philo->info->m.message);
 		ft_putnbr_fd(get_time(philo), 1);
-		ft_putstr_fd(" ms ", 1);
+		ft_putstr_fd("ms idx ", 1);
 		ft_putnbr_fd(philo->index, 1);
 		ft_putstr_fd(message, 1);
 		pthread_mutex_unlock(&philo->info->m.message);

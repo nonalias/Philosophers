@@ -12,7 +12,7 @@
 
 #include "philo_one.h"
 
-long 	get_time(t_philo *philo)
+long	get_time(t_philo *philo)
 {
 	struct timeval	time;
 	long			dtime;

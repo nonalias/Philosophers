@@ -12,6 +12,27 @@
 
 #include "philo_one.h"
 
+int		fork_init(t_philo **philo, int i)
+{
+	if (i == 0)
+	{
+		(*philo)[i].left_fork = malloc(sizeof(pthread_mutex_t));
+		if (!((*philo)[i].left_fork))
+			return (1);
+	}
+	else
+		(*philo)[i].left_fork = (*philo)[i - 1].right_fork;
+	if (i == (*philo)[i].info->number_of_philosophers - 1)
+		(*philo)[i].right_fork = (*philo)[0].left_fork;
+	else
+	{
+		(*philo)[i].right_fork = malloc(sizeof(pthread_mutex_t));
+		if (!((*philo)[i].right_fork))
+			return (1);
+	}
+	return (0);
+}
+
 int		philo_init(t_philo **philo, t_info *info)
 {
 	int		i;
@@ -19,20 +40,13 @@ int		philo_init(t_philo **philo, t_info *info)
 	*philo = malloc(sizeof(t_philo) * info->number_of_philosophers);
 	if (!*philo)
 		return (1);
-	///sec
 	i = 0;
 	while (i < info->number_of_philosophers)
 	{
         (*philo)[i].info = info;
 		(*philo)[i].index = i + 1;
-		if (i == 0)
-			(*philo)[i].left_fork = malloc(sizeof(pthread_mutex_t));
-		else
-			(*philo)[i].left_fork = (*philo)[i - 1].right_fork;
-		if (i == info->number_of_philosophers - 1)
-			(*philo)[i].right_fork = (*philo)[0].left_fork;
-		else
-			(*philo)[i].right_fork = malloc(sizeof(pthread_mutex_t));
+		if (fork_init(philo, i))
+			return (1);
 		pthread_mutex_init((*philo)[i].right_fork, NULL);
 		(*philo)[i].eat_count = 0;
 		(*philo)[i].info->eat_count[i] = &(*philo)[i].eat_count;

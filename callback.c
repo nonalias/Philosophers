@@ -30,7 +30,7 @@ void	eating(void *arg_philo)
 
 void	*running(void *arg_philo)
 {
-	t_philo *philo;
+	t_philo		*philo;
 	pthread_t	die_check;
 
 	philo = (t_philo *)arg_philo;
@@ -41,13 +41,15 @@ void	*running(void *arg_philo)
 			philo->index == philo->info->number_of_philosophers)
 		my_usleep(philo, philo->info->time_to_eat * 2);
 	while (philo->info->status == P_STATUS_NONE &&
-			philo->eat_count < philo->info->number_of_times_each_philosopher_must_eat)
+			philo->eat_count <
+			philo->info->number_of_times_each_philosopher_must_eat)
 	{
 		eating(philo);
-		if (philo->eat_count == philo->info->number_of_times_each_philosopher_must_eat)
+		if (philo->eat_count ==
+				philo->info->number_of_times_each_philosopher_must_eat)
 		{
 			philo->status = P_STATUS_EAT_COUNT_FULL;
-			break;
+			break ;
 		}
 		print_message(philo, " is sleeping\n");
 		my_usleep(philo, philo->info->time_to_sleep);
@@ -68,7 +70,7 @@ void	*die_monitoring(void *arg_philo)
 		if (get_time(philo) - philo->last_eat > philo->info->time_to_die)
 		{
 			pthread_mutex_lock(&philo->info->m.check_die);
-			print_message(philo, " died\n");
+			print_message(philo, " is died\n");
 			philo->info->status = P_STATUS_DEAD;
 			pthread_mutex_unlock(&philo->info->m.check_die);
 		}

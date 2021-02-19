@@ -1,6 +1,6 @@
-#ifndef PHILO_ONE__H
+#ifndef __PHILO_ONE_H
 
-# define PHILO_ONE__H
+# define __PHILO_ONE_H
 # include <unistd.h>
 # include <pthread.h>
 # include <stdio.h>
@@ -18,13 +18,12 @@
 
 # define T_TO_MS(S, US) (((S) * (1000L)) + ((US) / (1000L)))
 
-typedef struct  s_mutex
+typedef struct	s_mutex
 {
 	pthread_mutex_t	message;
 	pthread_mutex_t	check_die;
 	pthread_mutex_t	check_full;
-}               t_mutex;
-
+}				t_mutex;
 
 typedef struct	s_info
 {
@@ -37,10 +36,8 @@ typedef struct	s_info
 	long			process_start;
 	int				summary_eat_count;
 	int				**eat_count;
-    t_mutex         m;
+    t_mutex			m;
 }				t_info;
-
-
 
 typedef struct	s_philo
 {
@@ -58,7 +55,6 @@ typedef struct	s_philo
 **	philo_one.c
 */
 
-
 void	print_message(void *arg_philo, char *message);
 
 /*
@@ -69,7 +65,7 @@ int		ft_strlen(char *str);
 int		wr_error(char *error_msg);
 int		ft_atoi(char *str);
 void	ft_putstr_fd(char *str, int fd);
-void		ft_putnbr_fd(int n, int fd);
+void	ft_putnbr_fd(int n, int fd);
 
 /*
 **  init.c
@@ -77,7 +73,6 @@ void		ft_putnbr_fd(int n, int fd);
 
 int		philo_init(t_philo **philo, t_info *info);
 int		init(t_info *info, int argc, char **argv);
-
 
 /*
 **	valid_check.c
@@ -98,6 +93,6 @@ void	*die_monitoring(void *arg_philo);
 */
 
 void	my_usleep(t_philo *philo, long time);
-long 	get_time(t_philo *philo);
+long	get_time(t_philo *philo);
 
 #endif

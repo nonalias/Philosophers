@@ -69,9 +69,9 @@ void	ft_putstr_fd(char *str, int fd)
 	}
 }
 
-void		ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	long long	temp;
+	long	temp;
 
 	temp = n;
 	if (temp < 0)
