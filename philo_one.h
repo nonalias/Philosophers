@@ -16,6 +16,16 @@
 
 # define PHILO_INTERVAL 100
 
+# define T_TO_MS(S, US) (((S) * (1000L)) + ((US) / (1000L)))
+
+typedef struct  s_mutex
+{
+	pthread_mutex_t	message;
+	pthread_mutex_t	check_die;
+	pthread_mutex_t	check_full;
+}               t_mutex;
+
+
 typedef struct	s_info
 {
 	int				number_of_philosophers;
@@ -26,8 +36,11 @@ typedef struct	s_info
 	int				status;
 	long			process_start;
 	int				summary_eat_count;
-	pthread_mutex_t	m_mutex;
+	int				**eat_count;
+    t_mutex         m;
 }				t_info;
+
+
 
 typedef struct	s_philo
 {
@@ -38,6 +51,7 @@ typedef struct	s_philo
 	pthread_mutex_t	*right_fork;
 	long			last_eat;
 	int				eat_count;
+	int				status;
 }				t_philo;
 
 /*
