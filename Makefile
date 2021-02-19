@@ -1,8 +1,11 @@
 NAME	=	philo_one
 
-SRCS	=	proto.c \
+SRCS	=	philo_one.c \
 			init.c	\
 			utils.c \
+			valid_check.c \
+			callback.c \
+			time.c \
 
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
