@@ -12,13 +12,12 @@
 
 #include "philo_three.h"
 
-int		fork_init(t_philo **philo, int i)
+int		fork_init(t_philo **philo, int i, char *temp, char *itemp)
 {
-	char	*temp;
-
+	itemp = ft_itoa(i);
 	if (i == 0)
 	{
-		temp = ft_strjoin("leftfork", ft_itoa(i));
+		temp = ft_strjoin("leftfork", itemp);
 		sem_unlink(temp);
 		(*philo)[i].left_fork = sem_open(temp, O_CREAT, S_IRWXU, 1);
 		free(temp);
@@ -31,13 +30,14 @@ int		fork_init(t_philo **philo, int i)
 		(*philo)[i].right_fork = (*philo)[0].left_fork;
 	else
 	{
-		temp = ft_strjoin("rightfork", ft_itoa(i));
+		temp = ft_strjoin("rightfork", itemp);
 		sem_unlink(temp);
 		(*philo)[i].right_fork = sem_open(temp, O_CREAT, S_IRWXU, 1);
 		free(temp);
 		if (!((*philo)[i].right_fork))
 			return (1);
 	}
+	free(itemp);
 	return (0);
 }
 
@@ -53,7 +53,7 @@ int		philo_init(t_philo **philo, t_info *info)
 	{
 		(*philo)[i].info = info;
 		(*philo)[i].index = i + 1;
-		if (fork_init(philo, i))
+		if (fork_init(philo, i, NULL, NULL))
 			return (1);
 		(*philo)[i].eat_count = 0;
 		(*philo)[i].info->eat_count[i] = &(*philo)[i].eat_count;
