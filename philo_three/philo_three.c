@@ -43,14 +43,24 @@ int		main(int argc, char **argv)
 	i = 0;
 	while (i < info.number_of_philosophers)
 	{
-		pthread_create(&philo[i].tid, NULL, running, &(philo[i]));
+		philo[i].pid = fork();
+		if (philo[i].pid == 0)
+			running(&philo[i]);
+		//pthread_create(&philo[i].tid, NULL, running, &(philo[i]));
 		usleep(PHILO_INTERVAL);
 		i++;
 	}
 	i = 0;
 	while (i < info.number_of_philosophers)
 	{
+		waitpid(philo[i].pid, NULL, 0);
+		i++;
+	}
+	/*
+	while (i < info.number_of_philosophers)
+	{
 		pthread_join(philo[i].tid, NULL);
 		i++;
 	}
+	*/
 }

@@ -54,12 +54,13 @@ void	*running(void *arg_philo)
 				philo->info->number_of_times_each_philosopher_must_eat)
 		{
 			philo->status = P_STATUS_EAT_COUNT_FULL;
-			break ;
+			exit(0);
 		}
 		print_message(philo, " is sleeping\n");
 		my_usleep(philo, philo->info->time_to_sleep);
 		print_message(philo, " is thinking\n");
 	}
+	exit(0);
 	return (void *)NULL;
 }
 
@@ -76,8 +77,10 @@ void	*die_monitoring(void *arg_philo)
 		{
 			sem_wait(philo->info->sem.check_die);
 			print_message(philo, " is died\n");
-			philo->info->status = P_STATUS_DEAD;
 			sem_post(philo->info->sem.check_die);
+			for (int i = 0; i < philo->info->number_of_philosophers; i++)
+				kill(philo[i].pid, SIGINT);
+			//philo->info->status = P_STATUS_DEAD;
 		}
 	}
 	return (void *)NULL;

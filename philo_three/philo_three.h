@@ -18,6 +18,7 @@
 # include <semaphore.h>
 # include <sys/stat.h>
 # include <stdio.h>
+# include <signal.h>
 # include <sys/time.h>
 # include <stdlib.h>
 
@@ -54,7 +55,8 @@ typedef struct	s_info
 
 typedef struct	s_philo
 {
-	pthread_t		tid;
+	//pthread_t		tid;
+	pid_t			pid;
 	t_info			*info;
 	int				index;
 	long			last_eat;
