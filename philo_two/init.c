@@ -12,10 +12,10 @@
 
 #include "philo_two.h"
 
+/*
 int		fork_init(t_philo **philo, int i, char *temp, char *itemp)
 {
-	itemp = ft_itoa(i);
-	/*
+	//itemp = ft_itoa(i);
 	if (i == 0)
 	{
 		temp = ft_strjoin("leftfork", itemp);
@@ -39,16 +39,17 @@ int		fork_init(t_philo **philo, int i, char *temp, char *itemp)
 			return (1);
 	}
 	free(itemp);
-	*/
 	return (0);
 }
+	*/
 
 int		philo_init(t_philo **philo, t_info *info)
 {
 	int		i;
 
 	*philo = malloc(sizeof(t_philo) * info->number_of_philosophers);
-	philo->info->forks = sem_open("my_forks", O_CREAT, S_IRWXU, info->number_of_philosophers);
+	sem_unlink("my_forks");
+	info->forks = sem_open("my_forks", O_CREAT, S_IRWXU, info->number_of_philosophers);
 	if (!*philo)
 		return (1);
 	i = 0;
@@ -56,8 +57,8 @@ int		philo_init(t_philo **philo, t_info *info)
 	{
 		(*philo)[i].info = info;
 		(*philo)[i].index = i + 1;
-		if (fork_init(philo, i, NULL, NULL))
-			return (1);
+		//if (fork_init(philo, i, NULL, NULL))
+			//return (1);
 		(*philo)[i].eat_count = 0;
 		(*philo)[i].info->eat_count[i] = &(*philo)[i].eat_count;
 		(*philo)[i].last_eat = 0;

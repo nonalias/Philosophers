@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __PHILO_TWO_H
+#ifndef __PHILO_THREE_H
 
-# define __PHILO_TWO_H
+# define __PHILO_THREE_H
 # include <unistd.h>
 # include <pthread.h>
 # include <semaphore.h>
@@ -39,6 +39,12 @@ typedef struct	s_sem
 
 typedef struct	s_info
 {
+
+	/*
+	**	this is origin semaphore struct
+	*/
+
+	sem_t			*forks;
 	int				number_of_philosophers;
 	int				time_to_die;
 	int				time_to_eat;
@@ -56,8 +62,6 @@ typedef struct	s_philo
 	pthread_t		tid;
 	t_info			*info;
 	int				index;
-	sem_t			*left_fork;
-	sem_t			*right_fork;
 	long			last_eat;
 	int				eat_count;
 	int				status;

@@ -6,7 +6,7 @@
 /*   By: taehkim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:34:36 by taehkim           #+#    #+#             */
-/*   Updated: 2021/02/19 21:21:03 by taehkim          ###   ########.fr       */
+/*   Updated: 2021/02/19 15:57:16 by taehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void	eating(void *arg_philo)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg_philo;
-	sem_wait(philo->left_fork);
-	sem_wait(philo->right_fork);
+	sem_wait(philo->info->forks);
+	sem_wait(philo->info->forks);
 	print_message(philo, " has take a fork\n");
 	philo->eat_count++;
 	philo->last_eat = get_time(philo);
 	print_message(philo, " is eating\n");
 	my_usleep(philo, philo->info->time_to_eat);
-	sem_post(philo->right_fork);
-	sem_post(philo->left_fork);
+	sem_post(philo->info->forks);
+	sem_post(philo->info->forks);
 }
 
 void	give_time_interval(t_philo *philo)
