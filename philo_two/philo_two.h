@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_one.h                                        :+:      :+:    :+:   */
+/*   philo_two.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taehkim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:52:38 by taehkim           #+#    #+#             */
-/*   Updated: 2021/02/19 21:17:29 by taehkim          ###   ########.fr       */
+/*   Updated: 2021/02/19 21:53:51 by taehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ typedef struct	s_sem
 
 typedef struct	s_info
 {
-
-	/*
-	**	this is origin semaphore struct
-	*/
-
 	sem_t			*forks;
 	int				number_of_philosophers;
 	int				time_to_die;

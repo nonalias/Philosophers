@@ -6,42 +6,11 @@
 /*   By: taehkim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:34:59 by taehkim           #+#    #+#             */
-/*   Updated: 2021/02/19 21:18:20 by taehkim          ###   ########.fr       */
+/*   Updated: 2021/02/19 21:53:18 by taehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
-
-/*
-int		fork_init(t_philo **philo, int i, char *temp, char *itemp)
-{
-	//itemp = ft_itoa(i);
-	if (i == 0)
-	{
-		temp = ft_strjoin("leftfork", itemp);
-		sem_unlink(temp);
-		(*philo)[i].left_fork = sem_open(temp, O_CREAT, S_IRWXU, 1);
-		free(temp);
-		if (!((*philo)[i].left_fork))
-			return (1);
-	}
-	else
-		(*philo)[i].left_fork = (*philo)[i - 1].right_fork;
-	if (i == (*philo)[i].info->number_of_philosophers - 1)
-		(*philo)[i].right_fork = (*philo)[0].left_fork;
-	else
-	{
-		temp = ft_strjoin("rightfork", itemp);
-		sem_unlink(temp);
-		(*philo)[i].right_fork = sem_open(temp, O_CREAT, S_IRWXU, 1);
-		free(temp);
-		if (!((*philo)[i].right_fork))
-			return (1);
-	}
-	free(itemp);
-	return (0);
-}
-	*/
 
 int		philo_init(t_philo **philo, t_info *info)
 {
@@ -49,7 +18,8 @@ int		philo_init(t_philo **philo, t_info *info)
 
 	*philo = malloc(sizeof(t_philo) * info->number_of_philosophers);
 	sem_unlink("my_forks");
-	info->forks = sem_open("my_forks", O_CREAT, S_IRWXU, info->number_of_philosophers);
+	info->forks = sem_open("my_forks", O_CREAT, S_IRWXU,
+		info->number_of_philosophers);
 	if (!*philo)
 		return (1);
 	i = 0;
@@ -57,8 +27,6 @@ int		philo_init(t_philo **philo, t_info *info)
 	{
 		(*philo)[i].info = info;
 		(*philo)[i].index = i + 1;
-		//if (fork_init(philo, i, NULL, NULL))
-			//return (1);
 		(*philo)[i].eat_count = 0;
 		(*philo)[i].info->eat_count[i] = &(*philo)[i].eat_count;
 		(*philo)[i].last_eat = 0;
