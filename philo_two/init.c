@@ -6,7 +6,7 @@
 /*   By: taehkim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:34:59 by taehkim           #+#    #+#             */
-/*   Updated: 2021/02/19 16:01:49 by taehkim          ###   ########.fr       */
+/*   Updated: 2021/02/19 21:18:20 by taehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 int		fork_init(t_philo **philo, int i)
 {
 	char	*temp;
-	//sem_unlink(temp);
-	//(*philo)[i].right_fork = sem_open(temp, O_CREAT, S_IRWXU, 1);
+
 	if (i == 0)
 	{
 		temp = ft_strjoin("leftfork", ft_itoa(i));
@@ -45,7 +44,6 @@ int		fork_init(t_philo **philo, int i)
 int		philo_init(t_philo **philo, t_info *info)
 {
 	int		i;
-	//char	*temp;
 
 	*philo = malloc(sizeof(t_philo) * info->number_of_philosophers);
 	if (!*philo)
@@ -57,10 +55,6 @@ int		philo_init(t_philo **philo, t_info *info)
 		(*philo)[i].index = i + 1;
 		if (fork_init(philo, i))
 			return (1);
-		//temp = ft_strlcat("fork", ft_itoa(i));
-		//sem_unlink(temp);
-		//(*philo)[i].right_fork = sem_open(temp, O_CREAT, S_IRWXU, 1);
-		//pthread_mutex_init((*philo)[i].right_fork, NULL);
 		(*philo)[i].eat_count = 0;
 		(*philo)[i].info->eat_count[i] = &(*philo)[i].eat_count;
 		(*philo)[i].last_eat = 0;

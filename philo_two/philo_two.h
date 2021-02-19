@@ -6,13 +6,13 @@
 /*   By: taehkim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:52:38 by taehkim           #+#    #+#             */
-/*   Updated: 2021/02/19 16:22:23 by taehkim          ###   ########.fr       */
+/*   Updated: 2021/02/19 21:17:29 by taehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __PHILO_ONE_H
+#ifndef __PHILO_TWO_H
 
-# define __PHILO_ONE_H
+# define __PHILO_TWO_H
 # include <unistd.h>
 # include <pthread.h>
 # include <semaphore.h>
