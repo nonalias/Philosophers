@@ -15,6 +15,7 @@
 int		fork_init(t_philo **philo, int i, char *temp, char *itemp)
 {
 	itemp = ft_itoa(i);
+	/*
 	if (i == 0)
 	{
 		temp = ft_strjoin("leftfork", itemp);
@@ -38,6 +39,7 @@ int		fork_init(t_philo **philo, int i, char *temp, char *itemp)
 			return (1);
 	}
 	free(itemp);
+	*/
 	return (0);
 }
 
@@ -46,6 +48,7 @@ int		philo_init(t_philo **philo, t_info *info)
 	int		i;
 
 	*philo = malloc(sizeof(t_philo) * info->number_of_philosophers);
+	philo->info->forks = sem_open("my_forks", O_CREAT, S_IRWXU, info->number_of_philosophers);
 	if (!*philo)
 		return (1);
 	i = 0;
