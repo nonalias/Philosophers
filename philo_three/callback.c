@@ -6,7 +6,7 @@
 /*   By: taehkim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:34:36 by taehkim           #+#    #+#             */
-/*   Updated: 2021/02/19 15:57:16 by taehkim          ###   ########.fr       */
+/*   Updated: 2021/02/20 09:17:34 by taehkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	*die_monitoring(void *arg_philo)
 		if (get_time(philo) - philo->last_eat > philo->info->time_to_die)
 		{
 			sem_wait(philo->info->sem.check_die);
-			print_message(philo, " is died\n");
+			print_message(philo, " died\n");
 			sem_post(philo->info->sem.check_die);
 			i = 0;
 			while (i < philo->info->number_of_philosophers)
